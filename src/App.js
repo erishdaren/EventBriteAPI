@@ -25,6 +25,20 @@ export default class Class extends Component {
                  })
                 })
     }
+
+    obtenerEventos = async (busqueda) => {
+      let url = `https://www.eventbriteapi.com/v3/categories/?token=${this.token}=es_ES`;
+        await fetch(url)
+                .then(respuesta => {
+                  return respuesta.json();
+                })
+                .then(categorias => {
+                 this.setState({
+                   categorias : categorias.categories
+                 })
+                })
+      
+    }
     render() {
         return (
           <div className="App">
@@ -33,6 +47,7 @@ export default class Class extends Component {
                 <div className="uk-container">
                     <Formulario 
                       categorias = {this.state.categorias}
+                      obtenerEventos={this.obtenerEventos}
                     />
                 </div>
           </div>
